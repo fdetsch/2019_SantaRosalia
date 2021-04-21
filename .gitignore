@@ -2,4 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+00_basedata/001_data/*.xlsx
 00_basedata/001_data/gshhg
+00_basedata/001_data/mapasescaneados
+01_analysis/0101_data/georectification
+03_results
