@@ -51,7 +51,7 @@ dfs = Map(
   )
 )
 
-if (any(lengths(dfs) > 0) {
+if (any(lengths(dfs) > 0)) {
   stop("Fishing sites do not line up.")
 }
 
@@ -73,6 +73,12 @@ fish = st_difference(
   fish
   , st_as_sf(coasts)
 )[, names(fish)]
+
+# st_write(
+#   fish
+#   , dsn = "01_analysis/0101_data/fishing_sites_clipped"
+#   , driver = "ESRI Shapefile"
+# )
 
 
 ## CPUE ====
@@ -158,14 +164,38 @@ write.csv(
   , quote = FALSE
 )
 
+totals = do.call(
+  rbind
+  , lapply(
+    1:nrow(fish)
+    , function(i) {
+      if (!fish$name[i] %in% colnames(out)) {
+        return(NULL)
+      }
+      dat = t(data.frame(cpue = na.omit(out[, fish$name[i]])))
+      fish[i, "name"] %>% 
+        cbind(
+          total = dat[
+            , "total"
+          ]
+        )
+    }
+  )
+)
+
 m = mapview(
-  fish[, "name"]
+  totals[, "total"]
   , layer.name = "cpue"
-  , popup = popups
+  , popup = Filter(
+    Negate(
+      is.null
+    )
+    , popups
+  )
   , legend = FALSE
   , col = "grey65"
-  , col.regions = viridis::magma(nrow(fish))
-  , map.types = mapviewGetOption("basemaps")[c(3, 1:2, 4:5)]
+  , col.regions = viridis::plasma
+  , map.types = mapviewGetOption("basemaps")[c(5, 1:4)]
 )
 
 mapshot(
