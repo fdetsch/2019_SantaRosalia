@@ -2,9 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-00_basedata/001_data/*.xlsx
-00_basedata/001_data/gshhg
-00_basedata/001_data/mapasescaneados
+00_basedata/001_data/fishing_sites
 01_analysis/0101_data
 01_analysis/0130_checks/*.png
 02_docu
