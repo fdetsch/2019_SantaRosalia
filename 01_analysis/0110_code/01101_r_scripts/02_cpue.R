@@ -197,15 +197,18 @@ m = mapview(
     )
     , popups
   )
-  , legend = FALSE
   , col = "grey65"
   , col.regions = viridis::plasma
-  , map.types = mapviewGetOption("basemaps")[c(5, 1:4)]
+  , map.types = mapviewGetOption("basemaps")[c(2, 1, 3:5)]
 )
 
 mapshot(
   m
   , url = "03_results/cpue_sites.html"
+  , file = "03_results/cpue_sites.pdf"
+  , c(
+    "zoomControl", "layersControl", "homeButton", "drawToolbar", "easyButton"
+  )
 )
 
 
