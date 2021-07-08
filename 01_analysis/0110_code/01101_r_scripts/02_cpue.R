@@ -10,6 +10,7 @@ library(mapview)
 
 fish = st_read(
   "01_analysis/0101_data/fishing_sites/fishing_sites.shp"
+  , quiet = TRUE
 )
 
 
@@ -64,15 +65,19 @@ coasts = getData(
   , path = "00_basedata/001_data/gadm"
 )
 
-crp = st_crop(
-  fish
-  , st_as_sf(coasts)
+crp = suppressWarnings(
+  st_crop(
+    fish
+    , st_as_sf(coasts)
+  )
 )
 
-fish = st_difference(
-  fish
-  , st_as_sf(coasts)
-)[, names(fish)]
+fish = suppressWarnings(
+  st_difference(
+    fish
+    , st_as_sf(coasts)
+  )[, names(fish)]
+)
 
 # st_write(
 #   fish
