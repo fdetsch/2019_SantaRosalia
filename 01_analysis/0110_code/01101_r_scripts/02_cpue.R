@@ -21,7 +21,7 @@ trips = read.xlsx(
   , sheet = 2
 ) %>% 
   mutate(
-    `SITIO.DE.PESCA` = DStoolboxLite::practicalNames(`SITIO.DE.PESCA`)
+    `SITIO.DE.PESCA` = practicalNames(`SITIO.DE.PESCA`)
   )
 
 names(trips) = practicalNames(names(trips))
@@ -33,8 +33,8 @@ figures = read.xlsx(
   , rowNames = TRUE
 )
 
-names(figures) = DStoolboxLite::practicalNames(names(figures))
-rownames(figures) = DStoolboxLite::practicalNames(rownames(figures))
+names(figures) = practicalNames(names(figures))
+rownames(figures) = practicalNames(rownames(figures))
 
 ## check site consistency
 dfs = Map(
