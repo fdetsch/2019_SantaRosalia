@@ -9,7 +9,7 @@ library(mapview)
 ### . fishing sites ----
 
 fish = st_read(
-  "01_analysis/0101_data/fishing_sites.shp"
+  "01_analysis/0101_data/fishing_sites/fishing_sites.shp"
 )
 
 
@@ -17,7 +17,7 @@ fish = st_read(
 
 ## fishing trips
 trips = read.xlsx(
-  "00_basedata/001_data/03_04_21_SITIOS_PESCA.xlsx"
+  "00_basedata/001_data/fishing_sites/03_04_21_SITIOS_PESCA.xlsx"
   , sheet = 2
 ) %>% 
   mutate(
@@ -28,7 +28,7 @@ names(trips) = practicalNames(names(trips))
 
 ## catch figures
 figures = read.xlsx(
-  "00_basedata/001_data/03_04_21_SITIOS_PESCA.xlsx"
+  "00_basedata/001_data/fishing_sites/03_04_21_SITIOS_PESCA.xlsx"
   , sheet = 1
   , rowNames = TRUE
 )
